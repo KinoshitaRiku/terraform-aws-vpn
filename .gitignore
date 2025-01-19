@@ -5,4 +5,7 @@
 terraform.tfvars
 
 .vscode-server
-.ssh
+*.ssh
+*.crt
+*.key
+*.ovpn

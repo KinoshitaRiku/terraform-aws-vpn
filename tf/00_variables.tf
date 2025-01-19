@@ -1,6 +1,6 @@
 variable "project" {
   type        = string
-  default     = "tf-template"
+  default     = "vpn"
   description = "Project Name"
 }
 
@@ -8,6 +8,12 @@ variable "env" {
   type        = string
   default     = "dev"
   description = "Environment"
+}
+
+variable "region" {
+  type        = string
+  default     = "ca-central-1"
+  description = "Availability Zone"
 }
 
 variable "vpc_cidr" {
@@ -25,4 +31,10 @@ variable "cidr_block_map" {
     private_1c = "192.168.4.0/24"
   }
   description = "Domain"
+}
+
+variable "ec2_ami" {
+  type        = string
+  default     = "ami-00460ea486600dc1f"
+  description = "EC2 AMI"
 }

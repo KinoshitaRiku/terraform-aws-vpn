@@ -1,0 +1,15 @@
+client
+dev tun
+proto udp
+remote <EC2 IP> 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert user.crt
+key user.key
+cipher AES-256-CBC
+keepalive 10 60
+verb 3
+mssfix 1280

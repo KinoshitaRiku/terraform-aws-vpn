@@ -1,7 +1,7 @@
 ####################
-# SG_ECS
+# SG EC2
 ####################
-resource "aws_security_group" "ecs" {
+resource "aws_security_group" "ec2" {
   name   = "${var.project}-ecs-sg-${var.env}"
   vpc_id = aws_vpc.main.id
 
@@ -13,38 +13,20 @@ resource "aws_security_group" "ecs" {
   }
 }
 
-resource "aws_security_group_rule" "ecs" {
-  security_group_id = aws_security_group.ecs.id
+resource "aws_security_group_rule" "ec2_443" {
+  security_group_id = aws_security_group.ec2.id
   type              = "ingress"
-  from_port         = 80
-  to_port           = 80
+  from_port         = 443
+  to_port           = 443
   protocol          = "tcp"
-  cidr_blocks = [
-    aws_subnet.main["private_1a"].cidr_block,
-    aws_subnet.main["private_1c"].cidr_block
-  ]
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
-####################
-# RDS_ECS
-####################
-resource "aws_security_group" "rds" {
-  name   = "${var.project}-rds-sg-${var.env}"
-  vpc_id = aws_vpc.main.id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "aws_security_group_rule" "rds_from_ecs" {
-  security_group_id        = aws_security_group.ecs.id
-  type                     = "ingress"
-  from_port                = 3306
-  to_port                  = 3306
-  protocol                 = "tcp"
-  source_security_group_id = aws_security_group.ecs.id
+resource "aws_security_group_rule" "ec2_1194" {
+  security_group_id = aws_security_group.ec2.id
+  type              = "ingress"
+  from_port         = 1194
+  to_port           = 1194
+  protocol          = "udp"
+  cidr_blocks = ["0.0.0.0/0"]
 }
