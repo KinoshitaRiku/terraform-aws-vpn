@@ -18,9 +18,13 @@ sudo yum install -y epel-release
 sudo yum install -y openvpn
 sudo yum install -y easy-rsa --enablerepo=epel
 
+# PKI（公開鍵基盤）を初期化
 sudo /usr/share/easy-rsa/3/easyrsa init-pki
-sudo /usr/share/easy-rsa/3/easyrsa build-ca nopass
+# 対話なしで認証局（CA）の作成
+yes "" | sudo /usr/share/easy-rsa/3/easyrsa build-ca nopass
+# Diffie-Hellman（DH）パラメータの生成
 sudo /usr/share/easy-rsa/3/easyrsa gen-dh
+# 証明書失効リスト（CRL）の作成
 sudo /usr/share/easy-rsa/3/easyrsa gen-crl
 
 # VPNサーバの証明書作成
@@ -38,9 +42,9 @@ ca /etc/openvpn/server/ca.crt
 cert /etc/openvpn/server/issued/server.crt
 key /etc/openvpn/server/private/server.key
 dh /etc/openvpn/server/dh.pem
-server 10.8.0.0 255.255.255.0
+server 10.8.0.0 255.255.255.0 # サブネットのIP
 ifconfig-pool-persist ipp.txt
-push "route 192.168.1.0 255.255.255.0"
+push "route 192.168.1.78 255.255.255.0" # EC2のIP
 push "redirect-gateway def1"
 keepalive 10 120
 user nobody
@@ -67,3 +71,13 @@ echo "Starting and enabling OpenVPN server..."
 sudo systemctl restart openvpn@server
 sudo systemctl enable openvpn@server
 sudo systemctl status openvpn@server
+
+# 証明証の確認
+echo "--- /etc/openvpn/server/ca.crt ---"
+sudo cat /etc/openvpn/server/ca.crt
+
+echo "--- /etc/openvpn/server/issued/user.crt ---"
+sudo cat /etc/openvpn/server/issued/user.crt
+
+echo "--- /etc/openvpn/server/private/user.key ---"
+sudo cat /etc/openvpn/server/private/user.key
