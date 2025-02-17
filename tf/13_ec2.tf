@@ -1,4 +1,3 @@
-
 resource "aws_instance" "vpn_2" {
   ami           = var.ec2_ami
   instance_type = "t2.micro"
@@ -29,7 +28,7 @@ resource "aws_eip" "ec2_2" {
 }
 
 resource "aws_instance" "vpn" {
-  ami           = "ami-02e5504ea463e3f34"
+  ami           = "ami-029b114bda49ddabe"
   instance_type = "t2.micro"
 
   iam_instance_profile = aws_iam_instance_profile.ssm_instance_profile.name
