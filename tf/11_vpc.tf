@@ -49,14 +49,6 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
-resource "aws_eip" "ec2" {
-  domain = "vpc"
-  instance = aws_instance.vpn.id
-  tags = {
-    Name = "${var.project}-eip-ec2-${var.env}"
-  }
-}
-
 resource "aws_route_table" "main" {
   for_each = local.route_table_map
   vpc_id = aws_vpc.main.id
