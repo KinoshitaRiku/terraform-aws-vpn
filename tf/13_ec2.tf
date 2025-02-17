@@ -39,3 +39,4 @@ resource "aws_instance" "vpn" {
     sudo systemctl start amazon-ssm-agent
   EOF
 }
+
