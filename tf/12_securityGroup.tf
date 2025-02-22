@@ -13,15 +13,6 @@ resource "aws_security_group" "ec2" {
   }
 }
 
-resource "aws_security_group_rule" "ec2_443" {
-  security_group_id = aws_security_group.ec2.id
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
-}
-
 resource "aws_security_group_rule" "ec2_1194" {
   security_group_id = aws_security_group.ec2.id
   type              = "ingress"

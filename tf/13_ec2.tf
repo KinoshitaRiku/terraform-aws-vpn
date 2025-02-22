@@ -18,3 +18,11 @@ resource "aws_instance" "vpn" {
     sudo systemctl start amazon-ssm-agent
   EOF
 }
+
+resource "aws_eip" "ec2" {
+  domain = "vpc"
+  instance = aws_instance.vpn.id
+  tags = {
+    Name = "${var.project}-eip-ec2-${var.env}"
+  }
+}

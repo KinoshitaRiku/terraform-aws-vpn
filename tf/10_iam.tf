@@ -17,7 +17,7 @@ resource "aws_iam_role" "ssm_role" {
 resource "aws_iam_policy_attachment" "ssm_policy_attachment" {
   name       = "${var.project}-ssm-attachment-${var.env}"
   roles      = [aws_iam_role.ssm_role.name]
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore" # SSMアクセスに必要なポリシー
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_instance_profile" "ssm_instance_profile" {

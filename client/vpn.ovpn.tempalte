@@ -7,8 +7,8 @@ nobind
 persist-key
 persist-tun
 ca ca.crt
-cert user.crt
-key user.key
+cert client.crt
+key client.key
 cipher AES-256-CBC
 keepalive 10 60
 verb 3

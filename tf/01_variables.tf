@@ -35,6 +35,6 @@ variable "cidr_block_map" {
 
 variable "ec2_ami" {
   type        = string
-  default     = "ami-00460ea486600dc1f"
+  default     = "ami-029b114bda49ddabe"
   description = "EC2 AMI"
 }
