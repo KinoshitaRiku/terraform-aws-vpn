@@ -1,3 +1,6 @@
+# ------------------------- #
+# IAM Role SSM For EC2
+# ------------------------- #
 resource "aws_iam_role" "ssm_role" {
   name               = "${var.project}-ssm-role-${var.env}"
   assume_role_policy = jsonencode({

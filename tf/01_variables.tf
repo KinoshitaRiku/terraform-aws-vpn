@@ -38,3 +38,15 @@ variable "ec2_ami" {
   default     = "ami-029b114bda49ddabe"
   description = "EC2 AMI"
 }
+
+variable "is_openvpn" {
+  type        = bool
+  default     = false
+  description = "Flag to enable or disable OpenVPN setup"
+}
+
+variable "is_twingate" {
+  type        = bool
+  default     = false
+  description = "Flag to enable or disable Twingate setup"
+}

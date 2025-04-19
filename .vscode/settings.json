@@ -1,0 +1,13 @@
+{
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.formatOnSaveMode": "modifications",
+}

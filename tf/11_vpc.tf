@@ -22,6 +22,9 @@ locals {
   }
 }
 
+# ------------------------- #
+# VPC
+# ------------------------- #
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   instance_tenancy     = "default"
@@ -32,6 +35,9 @@ resource "aws_vpc" "main" {
   }
 }
 
+# ------------------------- #
+# Subnet
+# ------------------------- #
 resource "aws_subnet" "main" {
   for_each = local.subnet_map
   vpc_id            = aws_vpc.main.id
@@ -42,6 +48,9 @@ resource "aws_subnet" "main" {
   }
 }
 
+# ------------------------- #
+# Internet Gateway
+# ------------------------- #
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
   tags = {
@@ -49,6 +58,9 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
+# ------------------------- #
+# Route Table
+# ------------------------- #
 resource "aws_route_table" "main" {
   for_each = local.route_table_map
   vpc_id = aws_vpc.main.id
@@ -57,6 +69,9 @@ resource "aws_route_table" "main" {
   }
 }
 
+# ------------------------- #
+# Route
+# ------------------------- #
 resource "aws_route" "main" {
   for_each = local.route_table_map
   destination_cidr_block = "0.0.0.0/0"
@@ -64,6 +79,9 @@ resource "aws_route" "main" {
   gateway_id             = each.value.gateway_id
 }
 
+# ------------------------- #
+# Route Table Association
+# ------------------------- #
 resource "aws_route_table_association" "main" {
   for_each       = local.route_table_association_map
   subnet_id      = aws_subnet.main[each.key].id
